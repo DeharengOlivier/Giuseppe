@@ -62,11 +62,11 @@ export function Navbar() {
   if (loading) return null
 
   // Styles dynamiques selon la position
-  // Si sur Hero (Home non scrollée) : Position absolue en haut à droite, pillule minimale
-  // Sinon : Position fixe centrée, pillule complète
+  // Mobile sur Hero : Absolute top-right
+  // Mobile scrollé / Desktop : Fixed top-center
   const containerClasses = showHeroStyle && !mobileMenuOpen
-    ? "absolute top-4 right-4 z-50 flex justify-end px-4" // Hero style (Top Right)
-    : "fixed top-4 left-0 right-0 z-50 flex justify-center pt-0 px-4" // Standard style (Centered)
+    ? "absolute top-4 right-4 z-50 flex justify-end px-4 md:fixed md:left-0 md:right-0 md:justify-center"
+    : "fixed top-4 left-0 right-0 z-50 flex justify-center pt-0 px-4"
 
   return (
     <>
