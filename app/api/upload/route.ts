@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { writeFile, mkdir } from 'fs/promises'
-import { join } from 'path'
 import { auth } from '@/auth'
+import { getSupabaseAdmin } from '@/lib/supabase'
 
 export async function POST(request: NextRequest) {
   const session = await auth()
-  
+
   if (!session) {
     return NextResponse.json({ error: 'Non autorisé' }, { status: 401 })
   }
@@ -13,7 +12,7 @@ export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData()
     const file = formData.get('file') as File
-    
+
     if (!file) {
       return NextResponse.json({ error: 'Aucun fichier fourni' }, { status: 400 })
     }
@@ -21,8 +20,8 @@ export async function POST(request: NextRequest) {
     // Vérifier le type de fichier
     const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif', 'video/mp4', 'video/webm']
     if (!allowedTypes.includes(file.type)) {
-      return NextResponse.json({ 
-        error: 'Type de fichier non autorisé. Utilisez JPG, PNG, WebP, GIF, MP4 ou WebM' 
+      return NextResponse.json({
+        error: 'Type de fichier non autorisé. Utilisez JPG, PNG, WebP, GIF, MP4 ou WebM'
       }, { status: 400 })
     }
 
@@ -37,28 +36,36 @@ export async function POST(request: NextRequest) {
     const bytes = await file.arrayBuffer()
     const buffer = Buffer.from(bytes)
 
-    // Créer le dossier uploads s'il n'existe pas
-    const uploadsDir = join(process.cwd(), 'public', 'uploads')
-    try {
-      await mkdir(uploadsDir, { recursive: true })
-    } catch (error) {
-      // Le dossier existe déjà
-    }
-
     // Générer un nom de fichier unique
     const timestamp = Date.now()
     const originalName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_')
     const filename = `${timestamp}-${originalName}`
-    const filepath = join(uploadsDir, filename)
 
-    // Sauvegarder le fichier
-    await writeFile(filepath, buffer)
+    // Upload vers Supabase Storage
+    const supabase = getSupabaseAdmin()
+    const bucket = 'uploads'
 
-    // Retourner l'URL publique
-    const publicUrl = `/uploads/${filename}`
+    const { data, error } = await supabase.storage
+      .from(bucket)
+      .upload(filename, buffer, {
+        contentType: file.type,
+        upsert: false
+      })
 
-    return NextResponse.json({ 
-      success: true, 
+    if (error) {
+      console.error('Supabase Storage Error:', error)
+      return NextResponse.json({
+        error: `Erreur Supabase: ${error.message}`
+      }, { status: 500 })
+    }
+
+    // Récupérer l'URL publique
+    const { data: { publicUrl } } = supabase.storage
+      .from(bucket)
+      .getPublicUrl(filename)
+
+    return NextResponse.json({
+      success: true,
       url: publicUrl,
       filename,
       size: file.size,
