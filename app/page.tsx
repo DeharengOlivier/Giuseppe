@@ -5,6 +5,8 @@ import { fr } from 'date-fns/locale'
 import { ArrowRight, Briefcase } from 'lucide-react'
 import { SlideshowBackground } from '@/app/components/SlideshowBackground'
 
+export const dynamic = 'force-dynamic'
+
 async function getHomeData() {
   const pageContent = await prisma.pageContent.findMany()
   const articles = await prisma.article.findMany({
