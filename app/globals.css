@@ -1,8 +1,59 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #fafafa;
   --foreground: #171717;
+  
+  /* Variables de thème - seront remplacées dynamiquement par ThemeProvider */
+  --color-primary: #6b7280;
+  --color-primary-hover: #4b5563;
+  --color-primary-light: #9ca3af;
+  --color-secondary: #d1d5db;
+  --color-secondary-hover: #9ca3af;
+  --color-bg-main: #fafafa;
+  --color-bg-alt: #ffffff;
+  --color-text-primary: #111827;
+  --color-text-secondary: #4b5563;
+  --color-text-muted: #6b7280;
+  --color-border-main: #e5e7eb;
+  --color-border-light: #f3f4f6;
+  
+  /* Typographie */
+  --font-heading: 'Inter', -apple-system, sans-serif;
+  --font-body: 'Inter', -apple-system, sans-serif;
+  --font-mono: 'Courier New', monospace;
+  --text-h1: 3.75rem;
+  --text-h2: 2.25rem;
+  --text-h3: 1.875rem;
+  --text-h4: 1.5rem;
+  --text-body: 1rem;
+  --text-small: 0.875rem;
+  
+  /* Espacements */
+  --spacing-section-y: 4rem;
+  --spacing-section-x: 1rem;
+  --spacing-card-padding: 1.5rem;
+  --spacing-card-gap: 1rem;
+  
+  /* Border radius */
+  --radius-button: 9999px;
+  --radius-card: 1rem;
+  --radius-input: 0.5rem;
+  --radius-image: 0.75rem;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  
+  /* Animations */
+  --duration-fast: 150ms;
+  --duration-normal: 300ms;
+  --duration-slow: 500ms;
+  --easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --hover-scale: 1.05;
+  --hover-translate-y: -2px;
 }
 
 @theme inline {
@@ -10,17 +61,175 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  
+  /* Couleurs personnalisées basées sur les variables de thème */
+  --color-theme-primary: var(--color-primary);
+  --color-theme-primary-hover: var(--color-primary-hover);
+  --color-theme-bg-main: var(--color-bg-main);
+  --color-theme-bg-alt: var(--color-bg-alt);
+  --color-theme-text-primary: var(--color-text-primary);
+  --color-theme-text-secondary: var(--color-text-secondary);
+  --color-theme-text-muted: var(--color-text-muted);
+  --color-theme-border-main: var(--color-border-main);
+  --color-theme-border-light: var(--color-border-light);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #fafafa;
+    --foreground: #171717;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg-main);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+}
+
+/* Classes utilitaires pour le thème */
+.bg-theme-main {
+  background-color: var(--color-bg-main);
+}
+
+.bg-theme-alt {
+  background-color: var(--color-bg-alt);
+}
+
+.bg-theme-primary {
+  background-color: var(--color-primary);
+}
+
+.bg-theme-primary-hover:hover {
+  background-color: var(--color-primary-hover);
+}
+
+.text-theme-primary {
+  color: var(--color-text-primary);
+}
+
+.text-theme-secondary {
+  color: var(--color-text-secondary);
+}
+
+.text-theme-muted {
+  color: var(--color-text-muted);
+}
+
+.text-theme-inverted {
+  color: var(--color-bg-main);
+}
+
+.border-theme-main {
+  border-color: var(--color-border-main);
+}
+
+.border-theme-light {
+  border-color: var(--color-border-light);
+}
+
+.rounded-theme-button {
+  border-radius: var(--radius-button);
+}
+
+.rounded-theme-card {
+  border-radius: var(--radius-card);
+}
+
+.shadow-theme-sm {
+  box-shadow: var(--shadow-sm);
+}
+
+.shadow-theme-md {
+  box-shadow: var(--shadow-md);
+}
+
+.shadow-theme-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+.shadow-theme-xl {
+  box-shadow: var(--shadow-xl);
+}
+
+.transition-theme {
+  transition-duration: var(--duration-normal);
+  transition-timing-function: var(--easing);
+}
+
+.hover-scale-theme:hover {
+  transform: scale(var(--hover-scale));
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+/* Scrollbar hide utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Tiptap Editor Styles */
+.ProseMirror {
+  outline: none;
+}
+
+.ProseMirror h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.ProseMirror h3 {
+  font-size: 1.25em;
+  font-weight: bold;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.ProseMirror p {
+  margin-bottom: 0.75em;
+}
+
+.ProseMirror ul,
+.ProseMirror ol {
+  padding-left: 1.5em;
+  margin-bottom: 0.75em;
+}
+
+.ProseMirror blockquote {
+  border-left: 3px solid #d1d5db;
+  padding-left: 1em;
+  margin-left: 0;
+  font-style: italic;
+  color: #6b7280;
+}
+
+.ProseMirror code {
+  background-color: #f3f4f6;
+  padding: 0.125em 0.25em;
+  border-radius: 0.25em;
+  font-family: monospace;
+}
+
+/* Optimisation du chargement des polices Google Fonts */
+.fonts-loading * {
+  /* Éviter le flash de contenu non stylisé */
+  font-display: swap;
+}
+
+.fonts-loaded {
+  /* Indicateur que les polices sont chargées */
+  --fonts-status: loaded;
 }
