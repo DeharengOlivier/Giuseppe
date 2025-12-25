@@ -21,7 +21,7 @@ interface AboutPageProps {
 
 export function AboutPage({ content }: AboutPageProps) {
   return (
-    <div className="min-h-screen bg-theme-main py-20">
+    <div className="min-h-screen bg-theme-main pt-32 pb-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Titre centré */}
         <div className="text-center mb-16">
@@ -58,7 +58,7 @@ export function AboutPage({ content }: AboutPageProps) {
               {content.email && (
                 <div className="flex items-center gap-3 text-theme-secondary">
                   <Mail className="w-5 h-5 text-theme-primary" />
-                  <a 
+                  <a
                     href={`mailto:${content.email}`}
                     className="hover:text-theme-primary transition-theme"
                   >

@@ -49,7 +49,7 @@ const ActivityLabel = ({ type }: { type: Activity['type'] }) => {
 
 export function ActivitiesPage({ content }: ActivitiesPageProps) {
   return (
-    <div className="min-h-screen bg-theme-main py-20">
+    <div className="min-h-screen bg-theme-main pt-32 pb-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Titre centré */}
         <div className="text-center mb-16">
@@ -140,7 +140,7 @@ export function ActivitiesPage({ content }: ActivitiesPageProps) {
               Envie de collaborer ?
             </h2>
             <p className="text-theme-secondary mb-6 max-w-2xl mx-auto">
-              Je suis toujours intéressé par de nouveaux projets et collaborations. 
+              Je suis toujours intéressé par de nouveaux projets et collaborations.
               N'hésitez pas à me contacter pour échanger !
             </p>
             <button className="inline-flex items-center px-8 py-4 bg-theme-primary text-theme-inverted rounded-theme-button font-medium hover:bg-theme-primary-hover transition-theme shadow-theme-lg hover-scale-theme">

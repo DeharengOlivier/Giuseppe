@@ -14,10 +14,11 @@ export interface Page {
   showInFooter: boolean
 }
 
-interface PagesContextType {
+export interface PagesContextType {
   pages: Page[]
   navPages: Page[]
   footerPages: Page[]
+  siteContent: Record<string, string>
   loading: boolean
   refreshPages: () => Promise<void>
 }
@@ -26,17 +27,27 @@ const PagesContext = createContext<PagesContextType | undefined>(undefined)
 
 export function PagesProvider({ children }: { children: ReactNode }) {
   const [pages, setPages] = useState<Page[]>([])
+  const [siteContent, setSiteContent] = useState<Record<string, string>>({})
   const [loading, setLoading] = useState(true)
 
-  const fetchPages = async () => {
+  const fetchData = async () => {
     try {
-      const response = await fetch('/api/pages?public=true')
-      if (response.ok) {
-        const data = await response.json()
+      // Fetch Pages
+      const pagesRes = await fetch('/api/pages?public=true')
+      if (pagesRes.ok) {
+        const data = await pagesRes.json()
         setPages(data)
       }
+
+      // Fetch Content (for site name etc)
+      const contentRes = await fetch('/api/page-content')
+      if (contentRes.ok) {
+        const data = await contentRes.json()
+        setSiteContent(data)
+      }
+
     } catch (error) {
-      console.error('Erreur chargement pages:', error)
+      console.error('Erreur chargement données:', error)
     } finally {
       setLoading(false)
     }
@@ -44,15 +55,14 @@ export function PagesProvider({ children }: { children: ReactNode }) {
 
   // Chargement initial
   useEffect(() => {
-    fetchPages()
+    fetchData()
   }, [])
 
   // Écouter les événements de changement
   useEffect(() => {
     const unsubscribe = pageEvents.on((event: PageEvent) => {
       console.log('📄 Page event:', event.type, event.slug)
-      // Rafraîchir les pages quand il y a un changement
-      fetchPages()
+      fetchData()
     })
 
     return () => {
@@ -69,8 +79,9 @@ export function PagesProvider({ children }: { children: ReactNode }) {
         pages,
         navPages,
         footerPages,
+        siteContent,
         loading,
-        refreshPages: fetchPages,
+        refreshPages: fetchData,
       }}
     >
       {children}

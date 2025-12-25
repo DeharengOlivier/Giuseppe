@@ -29,7 +29,7 @@ export function ExperiencesTimeline({ title, experiences }: ExperiencesTimelineP
     const months = (endDate.getFullYear() - startDate.getFullYear()) * 12 + (endDate.getMonth() - startDate.getMonth())
     const years = Math.floor(months / 12)
     const remainingMonths = months % 12
-    
+
     if (years > 0 && remainingMonths > 0) {
       return `${years} an${years > 1 ? 's' : ''} ${remainingMonths} mois`
     } else if (years > 0) {
@@ -40,7 +40,7 @@ export function ExperiencesTimeline({ title, experiences }: ExperiencesTimelineP
   }
 
   return (
-    <div className="min-h-screen bg-theme-main py-20">
+    <div className="min-h-screen bg-theme-main pt-32 pb-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Titre centré */}
         <div className="text-center mb-16">

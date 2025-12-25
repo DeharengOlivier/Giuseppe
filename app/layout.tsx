@@ -5,6 +5,7 @@ import { AnalyticsTracker } from "./components/AnalyticsTracker";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { PagesProvider } from "./components/PagesProvider";
 import { PublicLayout } from "./components/PublicLayout";
+import { AOSInit } from "./components/AOSInit";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <AOSInit />
         <ThemeProvider>
           <PagesProvider>
             <AnalyticsTracker />

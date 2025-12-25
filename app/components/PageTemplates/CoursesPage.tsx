@@ -26,7 +26,7 @@ interface CoursesPageProps {
 
 export function CoursesPage({ content }: CoursesPageProps) {
   return (
-    <div className="min-h-screen bg-theme-main py-20">
+    <div className="min-h-screen bg-theme-main pt-32 pb-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Titre centré */}
         <div className="text-center mb-16">

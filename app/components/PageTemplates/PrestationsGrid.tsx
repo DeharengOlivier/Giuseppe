@@ -19,7 +19,7 @@ interface PrestationsGridProps {
 
 export function PrestationsGrid({ title, intro, prestations }: PrestationsGridProps) {
   return (
-    <div className="min-h-screen bg-theme-main py-20">
+    <div className="min-h-screen bg-theme-main pt-32 pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Titre centré */}
         <div className="text-center mb-16">
@@ -40,11 +40,10 @@ export function PrestationsGrid({ title, intro, prestations }: PrestationsGridPr
             {prestations.map((prestation) => (
               <div
                 key={prestation.id}
-                className={`relative bg-theme-alt rounded-theme-card border transition-theme hover-scale-theme ${
-                  prestation.featured
+                className={`relative bg-theme-alt rounded-theme-card border transition-theme hover-scale-theme ${prestation.featured
                     ? 'border-theme-primary shadow-theme-xl'
                     : 'border-theme-main shadow-theme-md hover:shadow-theme-lg'
-                }`}
+                  }`}
               >
                 {/* Badge "Recommandé" pour prestations featured */}
                 {prestation.featured && (
@@ -60,7 +59,7 @@ export function PrestationsGrid({ title, intro, prestations }: PrestationsGridPr
                   <h3 className="text-2xl font-bold text-theme-primary mb-3">
                     {prestation.title}
                   </h3>
-                  
+
                   <p className="text-theme-secondary mb-6 leading-relaxed">
                     {prestation.description}
                   </p>
@@ -92,11 +91,10 @@ export function PrestationsGrid({ title, intro, prestations }: PrestationsGridPr
 
                   {/* Bouton CTA */}
                   <button
-                    className={`w-full py-3 px-6 rounded-theme-button font-medium transition-theme flex items-center justify-center gap-2 group ${
-                      prestation.featured
+                    className={`w-full py-3 px-6 rounded-theme-button font-medium transition-theme flex items-center justify-center gap-2 group ${prestation.featured
                         ? 'bg-theme-primary text-theme-inverted hover:bg-theme-primary-hover'
                         : 'bg-theme-main border border-theme-main text-theme-primary hover:border-theme-primary'
-                    }`}
+                      }`}
                   >
                     <span>En savoir plus</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -117,7 +115,7 @@ export function PrestationsGrid({ title, intro, prestations }: PrestationsGridPr
             Besoin d'un service personnalisé ?
           </h2>
           <p className="text-theme-secondary mb-6 max-w-2xl mx-auto">
-            Chaque projet est unique. Contactez-moi pour discuter de vos besoins spécifiques 
+            Chaque projet est unique. Contactez-moi pour discuter de vos besoins spécifiques
             et obtenir un devis sur mesure.
           </p>
           <button className="inline-flex items-center px-8 py-4 bg-theme-primary text-theme-inverted rounded-theme-button font-medium hover:bg-theme-primary-hover transition-theme shadow-theme-lg hover-scale-theme gap-2">
