@@ -6,7 +6,7 @@ interface Course {
   id?: string
   title: string
   institution: string
-  type?: 'university' | 'professional'
+  type?: string
   level?: string | null
   duration?: string | null
   period?: string | null
@@ -50,7 +50,7 @@ export function CoursesPage({ content }: CoursesPageProps) {
                 Cours Universitaires
               </h2>
             </div>
-            
+
             <div className="grid gap-6 md:grid-cols-2">
               {content.universityCourses.map((course, index) => (
                 <div
@@ -60,7 +60,7 @@ export function CoursesPage({ content }: CoursesPageProps) {
                   <h3 className="text-xl font-semibold text-theme-primary mb-2">
                     {course.title}
                   </h3>
-                  
+
                   <div className="flex items-center gap-2 text-theme-secondary mb-3">
                     <BookOpen className="w-4 h-4" />
                     <span className="font-medium">{course.institution}</span>
@@ -74,14 +74,14 @@ export function CoursesPage({ content }: CoursesPageProps) {
                         </span>
                       </div>
                     )}
-                    
+
                     {course.period && (
                       <div className="flex items-center gap-1 text-sm text-theme-muted">
                         <Calendar className="w-4 h-4" />
                         <span>{course.period}</span>
                       </div>
                     )}
-                    
+
                     {course.duration && (
                       <div className="flex items-center gap-1 text-sm text-theme-muted">
                         <Clock className="w-4 h-4" />
@@ -110,7 +110,7 @@ export function CoursesPage({ content }: CoursesPageProps) {
                 Formations Professionnelles
               </h2>
             </div>
-            
+
             <div className="grid gap-6 md:grid-cols-2">
               {content.professionalTraining.map((course, index) => (
                 <div
@@ -120,7 +120,7 @@ export function CoursesPage({ content }: CoursesPageProps) {
                   <h3 className="text-xl font-semibold text-theme-primary mb-2">
                     {course.title}
                   </h3>
-                  
+
                   <div className="flex items-center gap-2 text-theme-secondary mb-3">
                     <BookOpen className="w-4 h-4" />
                     <span className="font-medium">{course.institution}</span>
@@ -134,14 +134,14 @@ export function CoursesPage({ content }: CoursesPageProps) {
                         </span>
                       </div>
                     )}
-                    
+
                     {course.period && (
                       <div className="flex items-center gap-1 text-sm text-theme-muted">
                         <Calendar className="w-4 h-4" />
                         <span>{course.period}</span>
                       </div>
                     )}
-                    
+
                     {course.duration && (
                       <div className="flex items-center gap-1 text-sm text-theme-muted">
                         <Clock className="w-4 h-4" />
@@ -163,14 +163,14 @@ export function CoursesPage({ content }: CoursesPageProps) {
 
         {/* Message si aucun contenu */}
         {(!content.universityCourses || content.universityCourses.length === 0) &&
-         (!content.professionalTraining || content.professionalTraining.length === 0) && (
-          <div className="text-center py-16">
-            <GraduationCap className="w-16 h-16 mx-auto mb-4 text-theme-muted" />
-            <p className="text-theme-muted text-lg">
-              Aucun cours ou formation disponible pour le moment
-            </p>
-          </div>
-        )}
+          (!content.professionalTraining || content.professionalTraining.length === 0) && (
+            <div className="text-center py-16">
+              <GraduationCap className="w-16 h-16 mx-auto mb-4 text-theme-muted" />
+              <p className="text-theme-muted text-lg">
+                Aucun cours ou formation disponible pour le moment
+              </p>
+            </div>
+          )}
       </div>
     </div>
   )
