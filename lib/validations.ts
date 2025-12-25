@@ -81,7 +81,11 @@ export const updatePageContentSchema = z.object({
 })
 
 // Helper function to validate and return errors
-export function validateData<T>(schema: z.ZodSchema<T>, data: unknown) {
+type ValidationResult<T> =
+  | { success: true; data: T }
+  | { success: false; errors: { path: string; message: string }[] }
+
+export function validateData<T>(schema: z.ZodSchema<T>, data: unknown): ValidationResult<T> {
   const result = schema.safeParse(data)
 
   if (!result.success) {
