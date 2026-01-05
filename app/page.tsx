@@ -233,7 +233,7 @@ export default async function Home() {
             <div className="text-center" data-aos="fade-up" data-aos-delay="200">
               <Link
                 href="/prestations"
-                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-theme-button text-theme-inverted bg-theme-primary hover:bg-theme-primary-hover transition-theme hover-scale-theme shadow-theme-lg"
+                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-theme-button text-theme-primary bg-theme-main hover:bg-theme-primary hover:text-theme-inverted transition-theme hover-scale-theme shadow-theme-lg"
               >
                 {content.home_services_cta_text || 'Découvrir les prestations'}
                 <ArrowRight className="ml-2 h-5 w-5" />
